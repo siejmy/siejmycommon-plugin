@@ -49,6 +49,7 @@ class ImageRenderer {
     $uploadDir = dirname($attachedFileLocalPath);
     $metadata = wp_get_attachment_metadata($id);
     if(empty($metadata)) return '';
+    if(!isset($metadata['sizes'][$blurry_size])) return '';
     $blurrySizeMeta = $metadata['sizes'][$blurry_size];
     if(empty($blurrySizeMeta)) return '';
     $blurryFilename = $blurrySizeMeta['file'];
