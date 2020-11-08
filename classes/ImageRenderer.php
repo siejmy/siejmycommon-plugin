@@ -11,8 +11,8 @@ class ImageRenderer {
 
     return
           '<amp-img'
-        . ' src="' . $img[0] .'" '
-        . ' srcset="' . esc_attr( $srcset ).'" '
+         . ' src="' . $img[0] .'" '
+         . ' srcset="' . esc_attr( $srcset ).'" '
         . ' alt="' . $alt . '"'
         . ' width="' . $w . '" height="' . $h . '"'
         . ' layout="responsive" noloading>'
