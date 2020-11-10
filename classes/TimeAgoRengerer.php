@@ -9,16 +9,15 @@ class TimeAgoRengerer {
 
   static function getTimeAgoKatoPL($post, $prepend) {
     $timestamp = get_the_time('U', $post);
-    $timeFormatted = get_the_time( '', $post );
 
-    return '<span class="time tooltip" data-tooltip-title="' . $timeFormatted . '" data-tooltip-position="bottom"'
+    return '<span class="time"'
     . '>'
       . $prepend
-      . self::getFunkKatoFormatted($timestamp, $timeFormatted)
+      . self::getFunkKatoFormatted($timestamp, $post)
     . '</span>';
   }
 
-  static  function getFunkKatoFormatted($timestamp, $timeFormatted) {
+  static  function getFunkKatoFormatted($timestamp, $post) {
     $difference = time() - $timestamp;
 
     if ($difference < 90) {
@@ -56,7 +55,12 @@ class TimeAgoRengerer {
       else if ($no < 5) return $no . ' tegodnie temu';
       else return $no . ' tygodni temu';
     }
-    return $timeFormatted;
+
+    return self::getDescriptiveDate($post);
+  }
+
+  static function getDescriptiveDate($post) {
+    return get_the_date('', $post);
   }
 }
 ?>
