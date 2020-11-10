@@ -1,37 +1,48 @@
 <?php
 class ImageRenderer {
-  function renderImgByAttachmentId($id, $alt) {
-    $srcset_min_size = 'siejmy_640';
-    $default_size = 'siejmy_1024';
+  function renderImageHero($opts) {
+    $mediaId = $opts['mediaId'];
+    $alt = $opts['alt'];
+    $elementId = $opts['elementId'];
+    $href = $opts['href'];
+    $caption = isset($opts['caption']) ? $opts['caption'] : '';
+    $cssClass = isset($opts['cssClass']) ? $opts['cssClass'] : '';
+
+    $bgStyles = '<style>#'. $elementId .' { background-image: url(' . $this->getFallbackDataSrc($mediaId) . '); background-position: center; background-repeat: no-repeat; background-size: cover; }</style>';
+    return
+        '<a class="' . $cssClass . '" href="' . $href . '" id="'. $elementId .'">'
+        . $this->renderImgByAttachmentId($mediaId, $alt, $opts)
+        . $caption
+        . '</a>'
+        . $bgStyles;
+  }
+
+  function renderImgByAttachmentId($id, $alt, $opts = array()) {
+    $srcset_min_size = isset($opts['srcset_min_size']) ? $opts['srcset_min_size'] : 'siejmy_640';
+    $default_size = isset($opts['default_size']) ? $opts['default_size'] : 'siejmy_1024';
+
     $img = wp_get_attachment_image_src($id, $default_size);
     $srcset = wp_get_attachment_image_srcset( $id, $srcset_min_size );
 
-    $w = $img[1];
-    $h = $img[2];
+    $srcW = $img[1];
+    $srcH = $img[2];
+    $w = isset($opts['width']) ? $opts['width'] : $srcW;
+    $h = isset($opts['height']) ? $opts['height'] : $srcH;
+    $layout = isset($opts['layout']) ? $opts['layout'] : 'responsive';
+
+    if(isset($opts['layoutMode']) && $opts['layoutMode'] == 'auto-width') {
+      $w = $srcW/$srcH*$h;
+    }
 
     return
           '<amp-img'
-         . ' src="' . $img[0] .'" '
-         . ' srcset="' . esc_attr( $srcset ).'" '
+        . ' src="' . $img[0] .'" '
+        . ' srcset="' . esc_attr( $srcset ).'" '
         . ' alt="' . $alt . '"'
         . ' width="' . $w . '" height="' . $h . '"'
-        . ' layout="responsive" noloading>'
+        . ' layout="' . $layout . '" noloading>'
         . '</amp-img>'
       ;
-  }
-
-  function getImgFallback($id, $w, $h, $alt) {
-    $sTime = microtime(true);
-    $srcData = $this->getFallbackDataSrc($id);
-    if(empty($srcData)) return '<!-- no fallback: no data src fetched -->';
-    $timeDebug = '<!-- generating fallback img took ' . (microtime(true) - $sTime) . 'us -->';
-    return '<amp-img'
-      . ' alt="' . $alt . '"'
-      . ' width="' . $w . '"'
-      . ' height="' . $h . '"'
-      . ' src="' . $srcData . '"'
-      . ' class="fallback-img"'
-      . 'noloading></amp-img>' . $timeDebug;
   }
 
   function getFallbackDataSrc($id) {

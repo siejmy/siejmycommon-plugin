@@ -13,6 +13,7 @@
 
 function siejmycommon_register_thumb_sizes() {
 	add_image_size( 'siejmy_blurry', 10, 10 );
+	add_image_size( 'siejmy_230', 230 );
 	add_image_size( 'siejmy_640', 640 );
 	add_image_size( 'siejmy_768', 768 );
 	add_image_size( 'siejmy_1024', 1024 );
