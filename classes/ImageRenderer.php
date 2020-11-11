@@ -9,7 +9,7 @@ class ImageRenderer {
     $caption = isset($opts['caption']) ? $opts['caption'] : '';
     $cssClass = isset($opts['cssClass']) ? $opts['cssClass'] : '';
 
-    $bgStyles = '<style>#'. $elementId .' { background-image: url(' . $this->getFallbackDataSrc($mediaId) . '); background-position: center; background-repeat: no-repeat; background-size: cover; }</style>';
+    $bgStyles = '<style>#'. $elementId .' { background-image: url(' . $this->getFallbackDataSrc($mediaId) . '); background-position: center; background-repeat: no-repeat; background-size: cover; display: block; }</style>';
     return
         '<' . $tag . ' class="' . $cssClass . '" ' . $hrefAttr . ' id="'. $elementId .'">'
         . $this->renderImgByAttachmentId($mediaId, $alt, $opts)
