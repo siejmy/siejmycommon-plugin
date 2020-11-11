@@ -4,16 +4,17 @@ class ImageRenderer {
     $mediaId = $opts['mediaId'];
     $alt = $opts['alt'];
     $elementId = $opts['elementId'];
-    $href = $opts['href'];
+    $hrefAttr = isset($opts['href']) ? 'href="' . $opts['href'] . '"' : '';
+    $tag = isset($opts['tag']) ? $opts['tag'] : 'a';
     $caption = isset($opts['caption']) ? $opts['caption'] : '';
     $cssClass = isset($opts['cssClass']) ? $opts['cssClass'] : '';
 
     $bgStyles = '<style>#'. $elementId .' { background-image: url(' . $this->getFallbackDataSrc($mediaId) . '); background-position: center; background-repeat: no-repeat; background-size: cover; }</style>';
     return
-        '<a class="' . $cssClass . '" href="' . $href . '" id="'. $elementId .'">'
+        '<' . $tag . ' class="' . $cssClass . '" ' . $hrefAttr . ' id="'. $elementId .'">'
         . $this->renderImgByAttachmentId($mediaId, $alt, $opts)
         . $caption
-        . '</a>'
+        . '</' . $tag . '>'
         . $bgStyles;
   }
 
@@ -22,6 +23,9 @@ class ImageRenderer {
     $default_size = isset($opts['default_size']) ? $opts['default_size'] : 'siejmy_1024';
 
     $img = wp_get_attachment_image_src($id, $default_size);
+    if(empty($img)) {
+      return '';
+    }
     $srcset = wp_get_attachment_image_srcset( $id, $srcset_min_size );
 
     $srcW = $img[1];
