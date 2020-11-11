@@ -1,153 +1,48 @@
-.siejmycommon {
-  background: blue;
-}
+/*********************************
+ Hero caption
+ */
 
-/* -------------------------------------------------------------------------- */
-/*	Tooltips
-/* -------------------------------------------------------------------------- */
-
-.tooltip {
-  position: relative;
-  cursor: pointer;
-  z-index: 1050;
-}
-.tooltip::after {
-  background-color: #000;
-  border-radius: 0.25rem;
-  color: #fff;
-  content: attr(data-tooltip-title);
-  font-weight: normal;
-  min-width: 150px;
-  padding: 0.5rem 0.75rem;
-  text-align: center;
-  text-transform: none;
+.herocaption {
+  display: block;
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  right: 1rem;
+  height: fit-content;
+  z-index: 2;
   font-size: 12px;
+  letter-spacing: 0.1rem;
+  transition: all 0.5s ease;
+  color: white;
 }
 
-.tooltip:disabled::after {
-  content: attr(data-disabled-tooltip-title);
+.herocaption h3 {
+  font-weight: 900;
+  font-size: 50px;
+  line-height: 1.25;
+  letter-spacing: 1px;
+  margin: 0.5rem 0;
+  text-shadow: 2px 2px 7px rgba(0, 0, 0, 0.5);
 }
 
-.tooltip::before {
-  width: 0;
-  height: 0;
-  content: "";
-  position: absolute;
-  transition: opacity 0.3s ease 0ms, transform 0.3s ease 0ms;
-  transform-style: preserve-3d;
-  opacity: 0;
-  z-index: -1;
+.herocaption .subline {
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 0.1rem;
+  opacity: 0.75;
+  text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.25);
 }
 
-.tooltip::after {
-  position: absolute;
-  transition: opacity 0.3s ease 0ms, transform 0.3s ease 0ms;
-  transform-style: preserve-3d;
-  opacity: 0;
-  z-index: -1;
+.herocaption .subline .time {
+  font-weight: 400;
+  opacity: 0.75;
 }
 
-/* Top tooltip * /
-.tooltip[data-tooltip-position="top"]::before {
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  left: 50%;
-  transform: translate3d(-50%, 10px, 0);
-  border-top: 7px solid black;
-  bottom: calc(100% + 3px);
-}
-
-.tooltip[data-tooltip-position="top"]:hover::before {
-  transform: translate3d(-50%, 0px, 0);
-}
-
-.tooltip[data-tooltip-position="top"]::after {
-  left: 50%;
-  transform: translate3d(-50%, 10px, 0);
-  bottom: calc(100% + 10px);
-}
-
-.tooltip[data-tooltip-position="top"]:hover::after {
-  transform: translate3d(-50%, 0px, 0);
-}
-*/
-
-/* Bottom tooltip */
-.tooltip[data-tooltip-position="bottom"]::before {
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  left: 50%;
-  transform: translate3d(-50%, -10px, 0);
-  border-bottom: 7px solid black;
-  top: calc(100% + 3px);
-}
-
-.tooltip[data-tooltip-position="bottom"]:hover::before {
-  transform: translate3d(-50%, 0px, 0);
-}
-
-.tooltip[data-tooltip-position="bottom"]::after {
-  left: 50%;
-  transform: translate3d(-50%, -10px, 0);
-  top: calc(100% + 10px);
-}
-
-.tooltip[data-tooltip-position="bottom"]:hover::after {
-  transform: translate3d(-50%, 0px, 0);
-}
-
-/* Left tooltip * /
-.tooltip[data-tooltip-position="left"]::before {
-  transform: translate3d(10px, -50%, 0);
-  border-left: 7px solid black;
-  right: calc(100% + 3px);
-  border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent;
-  top: 50%;
-}
-
-.tooltip[data-tooltip-position="left"]:hover::before {
-  transform: translate3d(0px, -50%, 0);
-}
-
-.tooltip[data-tooltip-position="left"]::after {
-  top: 50%;
-  transform: translate3d(10px, -50%, 0);
-  right: calc(100% + 10px);
-  right: calc(100% + 10px);
-}
-
-.tooltip[data-tooltip-position="left"]:hover::after {
-  transform: translate3d(0px, -50%, 0);
-}
-*/
-
-/* Right tooltip */
-.tooltip[data-tooltip-position="right"]::before {
-  transform: translate3d(-10px, -50%, 0);
-  border-right: 7px solid black;
-  left: calc(100% + 3px);
-  border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent;
-  top: 50%;
-}
-
-.tooltip[data-tooltip-position="right"]:hover::before {
-  transform: translate3d(0px, -50%, 0);
-}
-
-.tooltip[data-tooltip-position="right"]::after {
-  top: 50%;
-  transform: translate3d(-10px, -50%, 0);
-  left: calc(100% + 10px);
-}
-
-.tooltip[data-tooltip-position="right"]:hover::after {
-  transform: translate3d(0px, -50%, 0);
-}
-
-.tooltip:hover .tooltip::before,
-.tooltip:hover::after {
-  opacity: 1;
-  z-index: 100;
+.herocaption .tag {
+  display: block;
+  width: fit-content;
+  padding: 0.25rem;
+  background: #3ace00;
+  color: white;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
 }

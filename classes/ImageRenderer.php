@@ -33,6 +33,7 @@ class ImageRenderer {
     $w = isset($opts['width']) ? $opts['width'] : $srcW;
     $h = isset($opts['height']) ? $opts['height'] : $srcH;
     $layout = isset($opts['layout']) ? $opts['layout'] : 'responsive';
+    $mediaAttr = isset($opts['media']) ? 'media="' . $opts['media'] . '"' : '';
 
     if(isset($opts['layoutMode']) && $opts['layoutMode'] == 'auto-width') {
       $w = $srcW/$srcH*$h;
@@ -44,7 +45,8 @@ class ImageRenderer {
         . ' srcset="' . esc_attr( $srcset ).'" '
         . ' alt="' . $alt . '"'
         . ' width="' . $w . '" height="' . $h . '"'
-        . ' layout="' . $layout . '" noloading>'
+        . ' layout="' . $layout . '" noloading'
+        . ' ' . $mediaAttr . '>'
         . '</amp-img>'
       ;
   }
