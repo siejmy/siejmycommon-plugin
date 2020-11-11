@@ -16,7 +16,7 @@
   color: white;
 }
 
-.herocaption h3 {
+.herocaption .title {
   font-weight: 900;
   font-size: 50px;
   line-height: 1.25;

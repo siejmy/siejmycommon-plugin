@@ -3,15 +3,16 @@ require_once(dirname(__FILE__) . '/ImageRenderer.php');
 require_once(dirname(__FILE__) . '/TimeAgoRengerer.php');
 
 class HeroCaptionRenderer {
-  function render($post) {
+  function render($post, $opts = array()) {
     $permalink = get_permalink($post);
     $mediaId     = get_post_thumbnail_id($post);
     $alt = $post->post_title;
+    $titleTag = isset($opts['titleTag']) ? $opts['titleTag'] : 'h3';
 
     return '
         <div class="herocaption">
           ' . $this->renderTag($post) . '
-          <h3>' . $post->post_title . '</h3>
+          <' . $titleTag . ' class="title">' . $post->post_title . '</' . $titleTag . '>
           <div class="subline">
             <span class="author">' . $this->getAuthorName($post) . '</span>
             ' . TimeAgoRengerer::getTimeAgoKatoPL($post, ' &nbsp;◉') . '
