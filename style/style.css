@@ -40,6 +40,7 @@
 
 .herocaption .tag {
   display: block;
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0.25rem;
   background: #3ace00;

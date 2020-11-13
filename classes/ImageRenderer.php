@@ -8,10 +8,11 @@ class ImageRenderer {
     $tag = isset($opts['tag']) ? $opts['tag'] : 'a';
     $caption = isset($opts['caption']) ? $opts['caption'] : '';
     $cssClass = isset($opts['cssClass']) ? $opts['cssClass'] : '';
+    $rootIdAttr = isset($opts['attachIdToRoot']) && $opts['attachIdToRoot'] == true ? 'id="'. $elementId .'"' : '';
 
     $bgStyles = '<style>#'. $elementId .' { background-image: url(' . $this->getFallbackDataSrc($mediaId) . '); background-position: center; background-repeat: no-repeat; background-size: cover; display: block; }</style>';
     return
-        '<' . $tag . ' class="' . $cssClass . '" ' . $hrefAttr . ' id="'. $elementId .'">'
+        '<' . $tag . ' class="' . $cssClass . '" ' . $hrefAttr . ' ' . $rootIdAttr . '>'
         . $this->renderImgByAttachmentId($mediaId, $alt, $opts)
         . $caption
         . '</' . $tag . '>'
@@ -19,8 +20,10 @@ class ImageRenderer {
   }
 
   function renderImgByAttachmentId($id, $alt, $opts = array()) {
+    $showSrcset = isset($opts['showSrcset']) ? $opts['showSrcset'] : true;
     $srcset_min_size = isset($opts['srcset_min_size']) ? $opts['srcset_min_size'] : 'siejmy_640';
     $default_size = isset($opts['default_size']) ? $opts['default_size'] : 'siejmy_1024';
+    $attrs = isset($opts['attrs']) ? $opts['attrs'] : '';
 
     $img = wp_get_attachment_image_src($id, $default_size);
     if(empty($img)) {
@@ -42,10 +45,11 @@ class ImageRenderer {
     return
           '<amp-img'
         . ' src="' . $img[0] .'" '
-        . ' srcset="' . esc_attr( $srcset ).'" '
+        . ($showSrcset ? ' srcset="' . esc_attr( $srcset ) . '" ' : '')
         . ' alt="' . $alt . '"'
         . ' width="' . $w . '" height="' . $h . '"'
         . ' layout="' . $layout . '" noloading'
+        . ' ' . $attrs
         . ' ' . $mediaAttr . '>'
         . '</amp-img>'
       ;
@@ -75,6 +79,7 @@ class ImageRenderer {
   }
 
   function getImageAsOptimalPng($path) {
+    if(!file_exists($path)) return '';
     $img = new Imagick(realpath($path));
     $profiles = $img->getImageProfiles("icc", true);
     $img->stripImage();

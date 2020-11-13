@@ -7,14 +7,14 @@ class HeroCaptionRenderer {
     $permalink = get_permalink($post);
     $mediaId     = get_post_thumbnail_id($post);
     $alt = $post->post_title;
-    $titleTag = isset($opts['titleTag']) ? $opts['titleTag'] : 'h3';
+    $titleTag = isset($opts['titleTag']) ? $opts['titleTag'] : 'h2';
 
     return '
         <div class="herocaption">
           ' . $this->renderTag($post) . '
           <' . $titleTag . ' class="title">' . $post->post_title . '</' . $titleTag . '>
           <div class="subline">
-            <span class="author">' . $this->getAuthorName($post) . '</span>
+            <span class="author" rel="author">' . $this->getAuthorName($post) . '</span>
             ' . TimeAgoRengerer::getTimeAgoKatoPL($post, ' &nbsp;◉') . '
           </div>
         </div>';
