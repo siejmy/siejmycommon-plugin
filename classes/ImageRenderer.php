@@ -8,7 +8,7 @@ class ImageRenderer {
     $tag = isset($opts['tag']) ? $opts['tag'] : 'a';
     $caption = isset($opts['caption']) ? $opts['caption'] : '';
     $cssClass = isset($opts['cssClass']) ? $opts['cssClass'] : '';
-    $rootIdAttr = isset($opts['attachIdToRoot']) && $opts['attachIdToRoot'] == true ? 'id="'. $elementId .'"' : '';
+    $rootIdAttr = isset($opts['attachIdToRoot']) && $opts['attachIdToRoot'] == false ? '' : 'id="'. $elementId .'"';
 
     $bgStyles = '<style>#'. $elementId .' { background-image: url(' . $this->getFallbackDataSrc($mediaId) . '); background-position: center; background-repeat: no-repeat; background-size: cover; display: block; }</style>';
     return
@@ -24,6 +24,7 @@ class ImageRenderer {
     $srcset_min_size = isset($opts['srcset_min_size']) ? $opts['srcset_min_size'] : 'siejmy_640';
     $default_size = isset($opts['default_size']) ? $opts['default_size'] : 'siejmy_1024';
     $attrs = isset($opts['attrs']) ? $opts['attrs'] : '';
+    $fallbackContent = isset($opts['fallbackContent']) ? $opts['fallbackContent'] : '';
 
     $img = wp_get_attachment_image_src($id, $default_size);
     if(empty($img)) {
@@ -51,6 +52,7 @@ class ImageRenderer {
         . ' layout="' . $layout . '" noloading'
         . ' ' . $attrs
         . ' ' . $mediaAttr . '>'
+        . $fallbackContent
         . '</amp-img>'
       ;
   }
