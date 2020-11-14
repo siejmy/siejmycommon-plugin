@@ -12,7 +12,7 @@ class HeroCaptionRenderer {
     return '
         <div class="herocaption">
           ' . $this->renderTag($post) . '
-          <' . $titleTag . ' class="title">' . $post->post_title . '</' . $titleTag . '>
+          <' . $titleTag . ' class="title">' . $this->renderFitTitle($post->post_title) . '</' . $titleTag . '>
           <div class="subline">
             <span class="author" rel="author">' . $this->getAuthorName($post) . '</span>
             ' . TimeAgoRengerer::getTimeAgoKatoPL($post, ' &nbsp;◉') . '
@@ -26,6 +26,12 @@ class HeroCaptionRenderer {
       return '';
     }
     return '<div class="tag">' . $mainCategoryName . '</div>';
+  }
+
+  function renderFitTitle($text) {
+    return '<amp-fit-text layout="fill" min-font-size="20" max-font-size="500">'
+            . $text
+         . '</amp-fit-text>';
   }
 
   function getMainCategoryName($post) {
