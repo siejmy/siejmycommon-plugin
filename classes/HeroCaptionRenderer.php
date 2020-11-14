@@ -1,6 +1,6 @@
 <?php
 require_once(dirname(__FILE__) . '/ImageRenderer.php');
-require_once(dirname(__FILE__) . '/TimeAgoRengerer.php');
+require_once(dirname(__FILE__) . '/TimeAgoRenderer.php');
 
 class HeroCaptionRenderer {
   function render($post, $opts = array()) {
@@ -12,12 +12,12 @@ class HeroCaptionRenderer {
     return '
         <div class="herocaption">
           ' . $this->renderTag($post) . '
-          <' . $titleTag . ' class="title">' . $this->renderFitTitle($post->post_title) . '</' . $titleTag . '>
-          <div class="subline">
-            <span class="author" rel="author">' . $this->getAuthorName($post) . '</span>
-            ' . TimeAgoRengerer::getTimeAgoKatoPL($post, ' &nbsp;◉') . '
-          </div>
-        </div>';
+          <' . $titleTag . ' class="title">' . $this->renderFitTitle($post->post_title) . '</' . $titleTag . '>'
+           . TimeAgoRenderer::getTimeAgoKatoPL($post, array(
+              'prepend' => '<span class="author" rel="author">' . $this->getAuthorName($post) . '</span>',
+              'cssClass' => 'subline',
+            ))
+        . '</div>';
   }
 
   function renderTag($post) {

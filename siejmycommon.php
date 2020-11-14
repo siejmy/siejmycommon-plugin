@@ -11,6 +11,8 @@
  * @package         siejmy
  */
 
+require_once(dirname(__FILE__) . '/classes/TimeAgoRenderer.php');
+
 function siejmycommon_register_thumb_sizes() {
 	add_image_size( 'siejmy_blurry', 10, 10 );
 	add_image_size( 'siejmy_100', 100 );
@@ -42,3 +44,5 @@ function siejmycommon_init() {
   siejmycommon_register_styles();
 }
 add_action( 'init', 'siejmycommon_init' );
+
+add_action( 'wp_footer', 'time_ago_footer_hook' );
