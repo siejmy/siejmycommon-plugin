@@ -45,4 +45,5 @@ function siejmycommon_init() {
 }
 add_action( 'init', 'siejmycommon_init' );
 
+add_action( 'wp_head', 'time_ago_head_hook' );
 add_action( 'wp_footer', 'time_ago_footer_hook' );
