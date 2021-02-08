@@ -99,7 +99,7 @@ class TimeAgoRenderer {
       }
 
       const date = new Date(timestamp * 1000);
-      return date.getDate() + " " + miesiaceDopelniacz[date.getMonth()] + " " + date.getYear();
+      return date.getDate() + " " + miesiaceDopelniacz[date.getMonth()] + " " + date.getFullYear();
     }';
   }
 }
