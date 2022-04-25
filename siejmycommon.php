@@ -26,22 +26,8 @@ function siejmycommon_register_thumb_sizes() {
 	add_image_size( 'siejmy_2200', 2200 );
 }
 
-function siejmycommon_register_styles() {
-  $dir = dirname( __FILE__ );
-
-  $style_css = 'style/style.css';
-  wp_register_style(
-		'siejmycommon-styles',
-		plugins_url( $style_css, __FILE__ ),
-		array(),
-		filemtime( "$dir/$style_css" )
-  );
-  wp_enqueue_style('siejmycommon-styles');
-}
-
 function siejmycommon_init() {
   siejmycommon_register_thumb_sizes();
-  siejmycommon_register_styles();
 }
 add_action( 'init', 'siejmycommon_init' );
 
