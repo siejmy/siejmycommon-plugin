@@ -18,8 +18,8 @@ function siejmycommon_register_thumb_sizes() {
 	$ratio = 2/3;
 	$widths = [100, 230, 640, 768, 1024, 1366, 1600, 1920, 2200 ];
 	foreach($widths as $width) {
-		$name = 'siejmy_' + $width;
-		$height = $width * $ratio;
+		$name = 'siejmy_' . $width;
+		$height = floor($width * $ratio);
 		add_image_size( $name, $width, $height );
 	}
 }
