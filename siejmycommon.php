@@ -15,15 +15,13 @@ require_once(dirname(__FILE__) . '/classes/TimeAgoRenderer.php');
 
 function siejmycommon_register_thumb_sizes() {
 	add_image_size( 'siejmy_blurry', 10, 10 );
-	add_image_size( 'siejmy_100', 100 );
-	add_image_size( 'siejmy_230', 230 );
-	add_image_size( 'siejmy_640', 640 );
-	add_image_size( 'siejmy_768', 768 );
-	add_image_size( 'siejmy_1024', 1024 );
-	add_image_size( 'siejmy_1366', 1366 );
-	add_image_size( 'siejmy_1600', 1600 );
-	add_image_size( 'siejmy_1920', 1920 );
-	add_image_size( 'siejmy_2200', 2200 );
+	$ratio = 2/3;
+	$widths = [100, 230, 640, 768, 1024, 1366, 1600, 1920, 2200 ];
+	foreach($widths as $width) {
+		$name = 'siejmy_' . $width;
+		$height = floor($width * $ratio);
+		add_image_size( $name, $width, $height );
+	}
 }
 
 function siejmycommon_init() {
