@@ -43,6 +43,10 @@ class HeroCaptionRenderer {
   }
 
   function getAuthorName($post) {
+    $guest_author = get_post_meta($post->ID, 'guest_author', true);
+    if(!empty($guest_author)) {
+      return $guest_author;
+    }
     return get_the_author_meta('display_name', $post->post_author);
   }
 }
